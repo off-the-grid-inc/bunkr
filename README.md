@@ -376,7 +376,7 @@ The possible secret types are:
 
 After a `create` a coalition expects the next operation to be a `write` to fully initialize the secret (see `write` command).
 
-### delete
+#### delete
 
 `bunkr: >> delete <secret name>;`
 
@@ -439,7 +439,7 @@ This command stores a local file directly into Bunkr (the size limit is currentl
 
 #### new-group
 
-`bunkr: >> new-group <group name>`
+`bunkr: >> new-group <group name>;`
 
 A group is an intermediary Private Key stored in Bunkr which is used to group a number of Bunkr Secrets under a single capability. If you grant a group capability on a secret this means the group key has the capability to query that secret. In this way, if you grant a device capability on the Group Private Key, that device immediately inherits access to all the secrets attached to the group. 
 
