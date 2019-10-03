@@ -1,17 +1,30 @@
-# Bunkr SSH
+# Bunkr SSH Agent
 
-The Bunkr SSH agent is a custom SSH agent that works over Bunkr. The most interesting feature is that you do not need to have the SSH key to operate with it. Nor will it ever be exposed, since the sign operation is computed through secure multiparty computation.
+The Bunkr SSH Agent is a custom ssh agent that works over Bunkr. The most interesting feature is that you do not need to have the SSH key to operate with it. Nor will it ever be exposed, since the sign operation is computed through secure multiparty computation.
 To follow this tutorial you should be familiar with Bunkr already. If not, you can check it out [here](https://github.com/off-the-grid-inc/bunkr/blob/master/README.md)
 
 ## Installation
 
-get ssh-agent golang package:
-`$ go get github.com/off-the-grid-inc/bunkr/bunkr-ssh/ssh-agent`
+You can install the Bunkr SSH Agent from Bunkr's [releases](https://github.com/off-the-grid-inc/bunkr/releases) or you can compile the binary yourself.
 
-Compile ssh agent binary (from this directory):
+OSX Installation:
+```
+$ wget https://github.com/off-the-grid-inc/bunkr/releases/download/1.0.0/bunkr-ssh-osx -O bunkr-ssh
+$ chmod +x bunkr-ssh
+```
+
+Linux Installation:
+```
+$ wget https://github.com/off-the-grid-inc/bunkr/releases/download/1.0.0/bunkr-ssh-linux -O bunkr-ssh
+$ chmod +x bunkr-ssh
+```
+
+Compile binary from source:
+`$ go get github.com/off-the-grid-inc/bunkr/bunkr-ssh`
+`$ cd $GOPATH/src/github.com/off-the-grid-inc/bunkr/bunkr-ssh`
 `$ make bunkr-ssh`
 
-Place the binary on your `PATH` if you want it accessible from any command-line.
+Place the binary on your `PATH` (e.g. `/usr/local/bin`) if you want it accessible from any command-line.
 
 ## <a name=handling-keys>Handling your SSH keys with Bunkr</a>
 
