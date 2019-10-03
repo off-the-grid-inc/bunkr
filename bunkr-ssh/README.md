@@ -20,9 +20,11 @@ $ chmod +x bunkr-ssh
 ```
 
 Compile binary from source:
-`$ go get github.com/off-the-grid-inc/bunkr/bunkr-ssh`
-`$ cd $GOPATH/src/github.com/off-the-grid-inc/bunkr/bunkr-ssh`
-`$ make bunkr-ssh`
+```
+$ go get github.com/off-the-grid-inc/bunkr/bunkr-ssh
+$ cd $GOPATH/src/github.com/off-the-grid-inc/bunkr/bunkr-ssh
+$ make bunkr-ssh
+```
 
 Place the binary on your `PATH` (e.g. `/usr/local/bin`) if you want it accessible from any command-line.
 
