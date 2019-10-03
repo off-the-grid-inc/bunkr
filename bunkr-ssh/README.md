@@ -133,7 +133,7 @@ Lets say that we have two SSH keys (`ssh1`,`ssh2`) and we want to share them wit
 First we need to create a group for them:
 
 ```shell script
-$ bunkr new-group mySSHGroup;
+$ bunkr new-group mySSHGroup
 Secret created
 ```
 
@@ -303,7 +303,7 @@ Just follow the available [github tutorial on how to add a key](https://help.git
 
 Do any push or clone for a key required project. The signature will be executed through Bunkr!!
 
-## BETA notes
+## BETA Note
 
 Bunkr an all attached projects including this SSH agent are still in beta process. Although it is safe to store your keys within Bunkr we strongly recommend to always have a backup of your data.  
 
