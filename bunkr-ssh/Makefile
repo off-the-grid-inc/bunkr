@@ -12,4 +12,4 @@ bunkr-ssh:
 	-ldflags " \
 	-X main.Version=`cat .git/refs/heads/master` \
 	" \
-	-o bin/bunkr-ssh github.com/off-the-grid-inc/bunkr/ssh-agent/cmd
+	-o bin/bunkr-ssh github.com/off-the-grid-inc/bunkr/bunkr-ssh/cmd
