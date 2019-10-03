@@ -1,4 +1,4 @@
-# Bunkr
+![alt text](https://github.com/off-the-grid-inc/bunkr/blob/master/logo.jpg "Bunkr logo")
 
 Bunkr is a command line tool for secure storage and dynamic access management of sensitive or private data. Bunkr users store their private data across a decentralized network of remote machines using state of the art cryptographic techniques (Shamir Secret Sharing, Secure Multi Party Computation) that make sure the data is maximally resistant to either theft or loss. Data stored in Bunkr is accessible only to the exact devices specified by the user(s), and permissions can be granted and revoked dynamically. Even the remote machines that collectively store and serve data to Bunkr users have no way of individually knowing the underlying data they process. Passwords, API Keys, Cryptographic Keys and more can all be handled with previously inconceivable security and convenience thanks to Bunkr.
 
