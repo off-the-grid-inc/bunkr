@@ -26,11 +26,20 @@ Set up your free Bunkr Beta account in seconds. Follow the instructions to `Inst
 
 #### Install
 
-The Bunkr CLI Beta binary file can be found in the root directory of this repository. To use the binary from the command-line, make sure to place it somewhere on your `PATH` (e.g. `/usr/local/bin`).
+The Bunkr CLI Beta binary file can be downloaded from this repository's [releases](https://github.com/off-the-grid-inc/bunkr/releases). To use the binary from the command-line, make sure to place it somewhere on your `PATH` (e.g. `/usr/local/bin`).
 
+OSX Installation:
 ```
-$ git clone https://github.com/off-the-grid-inc/bunkr.git
-$ sudo cp bunkr/bunkr /usr/local/bin/bunkr
+$ wget https://github.com/off-the-grid-inc/bunkr/releases/download/1.0.0/bunkr-osx -O /usr/local/bin/bunkr
+$ chmod +x /usr/local/bin/bunkr
+$ bunkr -version
+Version: 1.0.0
+```
+
+Linux Installation:
+```
+$ wget https://github.com/off-the-grid-inc/bunkr/releases/download/1.0.0/bunkr-linux -O /usr/local/bin/bunkr
+$ chmod +x /usr/local/bin/bunkr
 $ bunkr -version
 Version: 1.0.0
 ```
