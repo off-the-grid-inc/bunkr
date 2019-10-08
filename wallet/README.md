@@ -20,9 +20,11 @@ Install the Bunkr Wallet (and all underlying requirements) with:
 
 To start using bunkrwallet python library run:
 
-```$ python3
+```
+$ python3
 >>> from bunkrwallet import BunkrWallet
->>> bw = BunkrWallet()```
+>>> bw = BunkrWallet()
+```
 
 ## Tutorial: create and use a testnet wallet
 
@@ -68,7 +70,7 @@ When creating a bitcoin transaction specify the transaction outputs in this form
 
 `[{"address": <bitcoin address>, "value": <number of satoshis>}, ...]`
 
-To easily convert between BTC and satoshis use (bitcoin core standard) COIN variable.
+To easily convert between BTC and satoshis use (bitcoin core standard) `COIN` variable.
 
 ```
 >>> outputs = [{"address":<some address>, "value":0.01*COIN}]
