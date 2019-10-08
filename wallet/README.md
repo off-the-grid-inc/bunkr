@@ -105,15 +105,16 @@ Optional parameter
 
 #### list_wallets
 
-```>>> bw.list_wallets()
-['your-wallet-name', 'your-other-wallet-name', ...]```
+```
+>>> bw.list_wallets()
+['your-wallet-name', 'your-other-wallet-name', ...]
+```
 
 Lists all the wallet names in the BunkrWallet directory.
 
 #### get_wallet
 
-```>>> w = bw.get_wallet("your-wallet-name")
-```
+`>>> w = bw.get_wallet("your-wallet-name")`
 
 Gets Wallet instance with the name "your-wallet-name" from the BunkrWallet.
 
@@ -121,24 +122,24 @@ Gets Wallet instance with the name "your-wallet-name" from the BunkrWallet.
 
 #### show_balance
 
-```>>> w.show_balance()```
+`>>> w.show_balance()`
 
 Prints the total balance of the wallet.
 
 #### show_fresh_address
 
-```>>> w.show_fresh_address()```
+`>>> w.show_fresh_address()`
 
 Shows an unused address on the wallet keyring. Use this method to get an address for receiving bitcoin. If there are no fresh addresses left in the wallet it will raise an error (to overcome this error see add_addresses)
 
 #### send
 
-```>>> w.send([{"address": <address 1>, "value": <satoshi amount to address 1}, ...], <fee amount>)```
+`>>> w.send([{"address": <address 1>, "value": <satoshi amount to address 1}, ...], <fee amount>)`
 
 Returns the signed transaction hex of a new bitcoin transaction. It is left to the user to publish the transaction.
 
 #### add_addresses
 
-```>>> w.add_addresses(<number of addresses>)```
+`>>> w.add_addresses(<number of addresses>)`
 
 Adds an amount of addresses to the wallet keyring.
