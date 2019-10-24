@@ -8,7 +8,6 @@ import (
 	"io"
 	"log"
 	"math/big"
-	"strings"
 
 	"golang.org/x/crypto/ssh"
 
@@ -52,21 +51,20 @@ func (s *wrappedSigner) SignWithAlgorithm(rand io.Reader, data []byte, algorithm
 	var signature []byte
 	var rawSignature Signature
 
-	stringSignature, err := s.signer.SignECDSA(s.secretName, b64Digest)
+	operationResult, err := s.signer.SignECDSA(s.secretName, b64Digest)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("Operation content: %s", stringSignature)
 
-	strSigs := strings.Split(stringSignature, " ")
-	rSig, err := base64.StdEncoding.DecodeString(strSigs[0])
+	rSig, err := base64.StdEncoding.DecodeString(operationResult["r"].(string))
 	if err != nil {
 		return nil, err
 	}
-	sSig, err := base64.StdEncoding.DecodeString(strSigs[1])
+	sSig, err := base64.StdEncoding.DecodeString(operationResult["s"].(string))
 	if err != nil {
 		return nil, err
 	}
+
 	var success bool
 	rawSignature.R, success = big.NewInt(0).SetString(string(rSig), 10)
 	if !success {

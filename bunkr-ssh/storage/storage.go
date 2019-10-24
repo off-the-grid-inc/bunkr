@@ -19,11 +19,7 @@ type AgentData struct {
 }
 
 type SecretData struct {
-	FileId     string
-	CapId      string
-	SecretType string
 	PublicData string
-	Group      string
 }
 
 func NewAgentStorage(path string) (*AgentStorage, error) {
@@ -97,14 +93,6 @@ func (storage *AgentStorage) RemoveSecret(name string) error {
 	if err := storage.Dump(); err != nil {
 		return err
 	}
-	for k, v := range storage.data.Secrets {
-		if v.Group == name {
-			if err := storage.RemoveSecret(k); err != nil {
-				return err
-			}
-		}
-	}
-
 	return nil
 }
 
@@ -120,21 +108,6 @@ func (storage *AgentStorage) GetSecret(name string) (*Secret, error) {
 func (storage *AgentStorage) SecretExists(name string) bool {
 	_, ok := storage.data.Secrets[name]
 	return ok
-}
-
-func (storage *AgentStorage) GetSecretsByType(secretType string) ([]*Secret, error) {
-	allSecrets, err := storage.GetSecrets()
-	if err != nil {
-		return nil, err
-	}
-	secrets := make([]*Secret, 0)
-	for _, secret := range allSecrets {
-		if string(secret.SecretType) == secretType {
-			secrets = append(secrets, secret)
-		}
-	}
-
-	return secrets, nil
 }
 
 func (storage *AgentStorage) Dump() error {
@@ -156,33 +129,14 @@ func (storage *AgentStorage) decodeSecret(name string, secretData *SecretData) (
 	}
 	s := &Secret{
 		Name:       name,
-		FileId:     secretData.FileId,
-		CapId:      secretData.CapId,
-		SecretType: secretData.SecretType,
 		PublicData: data,
-		Group:      nil,
-	}
-	if secretData.Group != "" {
-		group, err := storage.decodeSecret(secretData.Group, storage.data.Secrets[secretData.Group])
-		if err != nil {
-			return nil, err
-		}
-		s.Group = group
 	}
 	return s, nil
 }
 
 func (storage *AgentStorage) encodeSecret(secret *Secret) (*SecretData, error) {
 	sd := &SecretData{
-		FileId:     secret.FileId,
-		CapId:      secret.CapId,
-		SecretType: string(secret.SecretType),
 		PublicData: base64.StdEncoding.EncodeToString(secret.PublicData),
-		Group:      "",
 	}
-	if secret.Group != nil {
-		sd.Group = secret.Group.Name
-	}
-
 	return sd, nil
 }

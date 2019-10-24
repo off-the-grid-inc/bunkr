@@ -26,25 +26,13 @@ func TestAgentStorage(t *testing.T) {
 	// Test Store Secrets
 	secret1 := &Secret{
 		Name:       "secret1",
-		FileId:     "fid1",
-		CapId:      "cid1",
-		SecretType: "ECDSA-P256",
 		PublicData: []byte("data"),
-		Group:      nil,
 	}
 	secret2 := &Secret{
-		Name:       "secret2",
-		FileId:     "fid2",
-		CapId:      "cid2",
-		SecretType: "GENERIC-GF256",
-		Group:      secret1,
+		Name: "secret2",
 	}
 	secret3 := &Secret{
-		Name:       "secret3",
-		FileId:     "fid3",
-		CapId:      "cid3",
-		SecretType: "GENERIC-PF",
-		Group:      nil,
+		Name: "secret3",
 	}
 
 	err = bunkrStorage.StoreSecret(secret1)
@@ -58,25 +46,14 @@ func TestAgentStorage(t *testing.T) {
 	s, err := bunkrStorage.GetSecret("secret1")
 	require.NoError(err)
 	require.Equal(s.Name, secret1.Name, "should be equal")
-	require.Equal(s.CapId, secret1.CapId, "should be equal")
-	require.Equal(s.FileId, secret1.FileId, "should be equal")
+
 	s2, err := bunkrStorage.GetSecret("secret2")
 	require.NoError(err)
 	require.Equal(s2.Name, secret2.Name, "should be equal")
-	require.Equal(s2.CapId, secret2.CapId, "should be equal")
-	require.Equal(s2.FileId, secret2.FileId, "should be equal")
-	require.Equal(s2.Group.Name, secret1.Name, "should be equal")
-	require.Equal(s2.Group.CapId, secret1.CapId, "should be equal")
-	require.Equal(s2.Group.FileId, secret1.FileId, "should be equal")
-	require.Equal(s2.Group.Group, secret1.Group, "should both be nil")
 
 	secrets, err := bunkrStorage.GetSecrets()
 	require.NoError(err)
 	require.Len(secrets, 3, "should be equal")
-
-	secretsGF, err := bunkrStorage.GetSecretsByType("GENERIC-GF256")
-	require.NoError(err)
-	require.Len(secretsGF, 1, "should be equal")
 
 	// Test Remove Secret
 	err = bunkrStorage.RemoveSecret("secret1")

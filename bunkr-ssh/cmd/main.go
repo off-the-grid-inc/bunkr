@@ -8,7 +8,7 @@ import (
 	"sync"
 	"syscall"
 
-	ssh_agent "github.com/off-the-grid-inc/murmur/ssh-agent/ssh-agent"
+	ssh_agent "github.com/off-the-grid-inc/bunkr/bunkr-ssh/ssh-agent"
 )
 
 var Version string

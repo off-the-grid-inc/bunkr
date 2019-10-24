@@ -1,9 +1,7 @@
 package ssh_agent
 
 import (
-	"bytes"
 	"encoding/base64"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -15,8 +13,8 @@ import (
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/agent"
 
-	bunkr_client "github.com/off-the-grid-inc/bunkr/go-bunkr-client"
 	"github.com/off-the-grid-inc/bunkr/bunkr-ssh/storage"
+	bunkr_client "github.com/off-the-grid-inc/bunkr/go-bunkr-client"
 )
 
 type SSHAgent struct {
@@ -142,19 +140,20 @@ func (ssha *SSHAgent) AddKey(secret *storage.Secret) error {
 }
 
 func (ssha *SSHAgent) ImportKey(secretName string) error {
-	secretData, err := ssha.bunkrClient.SSHPublicData(secretName)
+	operationResult, err := ssha.bunkrClient.SSHPublicData(secretName)
 	if err != nil {
 		return err
 	}
 
-	byteContent, err := base64.StdEncoding.DecodeString(secretData)
+	publicData := operationResult["public_data"].(map[string]interface{})
+	publicKey, err := base64.StdEncoding.DecodeString(publicData["public_key"].(string))
 	if err != nil {
 		return err
 	}
 
-	var secret storage.Secret
-	if err := json.NewDecoder(bytes.NewReader(byteContent)).Decode(&secret); err != nil {
-		return err
+	secret := storage.Secret{
+		Name:       publicData["name"].(string),
+		PublicData: publicKey,
 	}
 
 	if err := ssha.storage.StoreSecret(&secret); err != nil {

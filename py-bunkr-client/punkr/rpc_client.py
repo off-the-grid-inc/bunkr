@@ -59,14 +59,14 @@ class RpcTcpClient(object):
         if not self.__connected:
             raise ConnectionError("Client is not connected to any TCP server.")
         self.socket.sendall(message.encode())
-        data = self.socket.recv(1024)
+        data = self.socket.recv(2048)
         return json.loads(data.decode())
 
     async def async_send(self, message):
         if not self.__connected or not self.writer or not self.reader:
             raise ConnectionError("Client is not connected to any TCP server.")
         self.writer.write(message.encode())
-        data = await self.reader.read(1024)
+        data = await self.reader.read(2048)
         return json.loads(data.decode())
 
     def __enter__(self):
@@ -89,9 +89,9 @@ class RpcTcpClient(object):
 
 if __name__ == "__main__":
     bunkr_address = "/tmp/bunkr_daemon.sock"
-    create = str(JsonProtocol("1.0", "CommandProxy.HandleCommand", {"Line": "new-text-secret foo foocontent"}))
-    access = str(JsonProtocol("1.0", "CommandProxy.HandleCommand", {"Line": "access foo"}))
-    delete = str(JsonProtocol("1.0", "CommandProxy.HandleCommand", {"Line": "delete foo"}))
+    create = str(JsonProtocol("1.0", "CommandProxy.HandleCommand", {"Command": "new-text-secret", "Args" : ["foo_test", "foo content"]}))
+    access = str(JsonProtocol("1.0", "CommandProxy.HandleCommand", {"Command": "access", "Args" : ["foo_test"]}))
+    delete = str(JsonProtocol("1.0", "CommandProxy.HandleCommand", {"Command": "delete", "Args" : ["foo_test"]}))
 
     with RpcTcpClient(bunkr_address) as client:
         print(client.send(create))

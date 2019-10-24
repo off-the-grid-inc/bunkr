@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='punkr',
-    version='0.2.0',
+    version='1.0.0',
     author="off-the-grid-inc",
     author_email="accounts@off-the-grid.io",
     description="Bunkr operations wrapper",
@@ -18,6 +18,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "parse"
     ]
  )
