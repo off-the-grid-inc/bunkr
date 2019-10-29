@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+
+from bunkrwallet import BunkrWallet
+import click
+from pprint import pformat
+
+def __startup(name):
+    wallet = BunkrWallet()
+    return wallet.get_wallet(name)
+
+def __list_wallets():
+    wallet = BunkrWallet()
+    return wallet.list_wallets()
+
+def __check_balance(name):
+    wallet = __startup(name)
+    return wallet.show_balance()
+
+def __get_address(name):
+    wallet = __startup(name)
+    return wallet.show_fresh_address()
+
+def __send(name, address, amount, fee):
+    wallet = __startup(name)
+    transaction = wallet.send([{"address" : address, "value": amount}], fee)
+    return transaction
+
+def __new_wallet(name, testnet):
+    wallet = BunkrWallet()
+    wallet.create_wallet(name, testnet)
+
+
+@click.group()
+def commands():
+    pass
+
+@click.command("list-wallets")
+def list_wallets():
+    result =  __list_wallets()
+    click.echo("Available wallets:")
+    click.echo(pformat(result))
+
+@click.command("check-balance")
+@click.option("--wallet", help="Name of the wallet to operate with")
+def check_balance(wallet):
+    result = __check_balance(wallet)
+    click.echo("Balance:")
+    click.echo(pformat(result))
+
+@click.command("get-address")
+@click.option("--wallet", help="Name of the wallet to operate with")
+def get_address(wallet):
+    result = __get_address(wallet)
+    click.echo("Receive address:")
+    click.echo(pformat(result))
+
+@click.command("transaction")
+@click.option("--wallet", help="Name of the wallet to operate with")
+@click.option("--address", help="Target address of the transaction")
+@click.option("--amount", help="Amount to be sent")
+@click.option("--fee", help="Transaction fee")
+def send(wallet, address, amount, fee):
+    result = __send(wallet, address, amount, fee)
+    click.echo("Transaction hex:")
+    click.echo(pformat(result))
+
+
+@click.command("new-wallet")
+@click.option("--name", help="Name of the new wallet")
+@click.option('--testnet/--mainnet', default=True, help="Blockchain network to use")
+def new_wallet(name, testnet):
+    __new_wallet(name, testnet)
+    click.echo("Wallet created")
+
+for operation in (list_wallets, get_address, check_balance, send, new_wallet):
+    commands.add_command(operation)
+
+if __name__ == "__main__":
+    commands()
