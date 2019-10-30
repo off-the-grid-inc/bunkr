@@ -21,20 +21,29 @@ $ pip install bunkrwallet
 Verify installation with
 
 ```
-$ bunkr-wallet list-wallets
-Available wallets:
-[]
+$ bunkr-wallet
+Usage: bunkr-wallet [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  check-balance
+  get-address
+  list-wallets
+  new-wallet
+  transaction
 ```
 
 ## Usage
 
 Bunkr Wallet can be used with the `bunkr-wallet` commnad line interface. For now the possible commands are very simple:
 
-1. `list-wallets` (see the names of your different bunkr wallets)
-2. `new-wallet` (create a bunkr wallet)
-3. `check-balance` (check the balance of a bunkr wallet)
-4. `get-address` (get a receiving address for a bunkr wallet)
-5. `transaction` (send bitcoin from a bunkr wallet)
+1. `list-wallets` (list names of existing bunkr wallets)
+2. `new-wallet` (create a bunkr wallet) args: `--name <your name>`
+3. `check-balance` (check the balance of a bunkr wallet) args: `--wallet <wallet name>`
+4. `get-address` (get a receiving address for a bunkr wallet) args: `--wallet <wallet name>`
+5. `transaction` (send bitcoin from a bunkr wallet) args: `--wallet <wallet name> --address <recipient> --amount <# satoshi> --fee <# satoshi>`
 
 Most notably, when signing transactions, the wallet communicates with Bunkr to sign without ever recomposing the private key on any device.
 
