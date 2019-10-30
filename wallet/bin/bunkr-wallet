@@ -60,7 +60,7 @@ def get_address(wallet):
 @click.option("--amount", help="Amount to be sent")
 @click.option("--fee", help="Transaction fee")
 def send(wallet, address, amount, fee):
-    result = __send(wallet, address, int(amount), int(fee))
+    result = __send(wallet, address, amount, fee)
     click.echo("Transaction hex:")
     click.echo(pformat(result))
 

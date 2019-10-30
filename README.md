@@ -30,18 +30,18 @@ The Bunkr CLI Beta binary file can be downloaded from this repository's [release
 
 OSX Installation:
 ```
-$ wget https://github.com/off-the-grid-inc/bunkr/releases/download/2.0.0/bunkr-osx -O /usr/local/bin/bunkr
+$ wget https://github.com/off-the-grid-inc/bunkr/releases/download/1.0.0/bunkr-osx -O /usr/local/bin/bunkr
 $ chmod +x /usr/local/bin/bunkr
 $ bunkr -version
-Version: 2.0.0
+Version: 1.0.0
 ```
 
 Linux Installation:
 ```
-$ wget https://github.com/off-the-grid-inc/bunkr/releases/download/2.0.0/bunkr-linux -O /usr/local/bin/bunkr
+$ wget https://github.com/off-the-grid-inc/bunkr/releases/download/1.0.0/bunkr-linux -O /usr/local/bin/bunkr
 $ chmod +x /usr/local/bin/bunkr
 $ bunkr -version
-Version: 2.0.0
+Version: 1.0.0
 ```
 
 #### Sign In
